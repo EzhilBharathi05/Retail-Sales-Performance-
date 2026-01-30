@@ -1,0 +1,48 @@
+-- Retail Sales Performance Analysis
+-- SQL queries written to calculate key business KPIs
+-- Used for dashboard creation and business insights
+
+-- 1. Calculate total sales revenue
+SELECT 
+    SUM(Total_Amount) AS Total_Sales
+FROM Retail_Sales_Data;
+
+-- 2. Monthly sales trend analysis
+SELECT 
+    MONTH(Order_Date) AS Sales_Month,
+    SUM(Total_Amount) AS Monthly_Sales
+FROM Retail_Sales_Data
+GROUP BY MONTH(Order_Date)
+ORDER BY Sales_Month;
+
+-- 3. Sales performance by product category
+SELECT 
+    Product_Category,
+    SUM(Total_Amount) AS Category_Sales
+FROM Retail_Sales_Data
+GROUP BY Product_Category
+ORDER BY Category_Sales DESC;
+
+-- 4. Sales contribution by customer gender
+SELECT 
+    Gender,
+    SUM(Total_Amount) AS Gender_Sales
+FROM Retail_Sales_Data
+GROUP BY Gender;
+
+-- 5. Sales distribution by customer age
+SELECT 
+    Age,
+    SUM(Total_Amount) AS Age_Based_Sales
+FROM Retail_Sales_Data
+GROUP BY Age
+ORDER BY Age;
+
+-- 6. Identify low performing product categories
+SELECT 
+    Product_Category,
+    SUM(Total_Amount) AS Category_Sales
+FROM Retail_Sales_Data
+GROUP BY Product_Category
+HAVING SUM(Total_Amount) < 50000
+ORDER BY Category_Sales;
